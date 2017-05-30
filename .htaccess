@@ -1,3 +1,19 @@
+DirectoryIndex index.php
+
+#enable apache rewrite engine
+RewriteEngine on
+
+#set your rewrite base
+RewriteBase /shoen/
+
+#Deliver the folder or file if it exists on the server directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+ 
+#Push every request to index.php
+RewriteRule ^(.*)$ index.php [QSA]
+
+
 # rewrite rules
 <IfModule mod_rewrite.c>
 
@@ -17,28 +33,29 @@ RewriteEngine on
 # RewriteBase /
 
 # block text files in the content folder from being accessed directly
-RewriteRule ^content/(.*)\.(txt|md|mdown)$ index.php [L]
+# RewriteRule ^content/(.*)\.(txt|md|mdown)$ index.php [L]
 
 # block all files in the site folder from being accessed directly
 # except for requests to plugin assets files
-#RewriteRule ^assets/plugins/([a-zA-Z0-9\.\-_%=]+)/(.*)$ site/plugins/$1/assets/$2 [L,N]
-#RewriteCond $1 !^plugins/[a-zA-Z0-9\.\-_%=]+/assets/.*
-RewriteRule ^site/(.*) index.php [L]
+# RewriteRule ^assets/plugins/([a-zA-Z0-9\.\-_%=]+)/(.*)$ site/plugins/$1/assets/$2 [L,N]
+# RewriteCond $1 !^plugins/[a-zA-Z0-9\.\-_%=]+/assets/.*
+
+#RewriteRule ^site/(.*) index.php [L]
 
 # block direct access to kirby and the panel sources
-RewriteRule ^(cms|admin\/app|admin\/tests)/(.*) index.php [L]
+#RewriteRule ^(cms|admin\/app|admin\/tests)/(.*) index.php [L]
 
 # make panel links work
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^panel/(.*) panel/index.php [L]
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^panel/(.*) panel/index.php [L]
 
 # make site links work
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*) index.php [L]
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*) index.php [L]
 
-</IfModule>
+#</IfModule>
 
 # Additional recommended values
 #
