@@ -1,4 +1,5 @@
 <?PHP
+
 class router{
 	
 	public static $routes = Array();

@@ -3,10 +3,20 @@ require_once 'app/router.php';
 require_once 'app/controller.php';
 
 
+/*https://github.com/liamjack/AuthPortal */
+/* TODO - Namespaces
+namespace Model; 
+class Welcome extends \Model {
+use \Model\Welcome;
+class Controller_Welcome extends Controller {...
+*/
+
+// $a = new Auth();
+
+
 echo "<pre>";
-/*
- *  Routen
- */
+
+/*  Routen  */
 
 $r = new router();
 
@@ -14,6 +24,7 @@ $r->set_basepath('shoen');
 
 $r->add('', function() {
 	echo 'Welcome :-)';
+	echo '<br>'. phpversion();
 });
 
 $r->add('test', function() {
@@ -22,8 +33,20 @@ $r->add('test', function() {
 	$c->index();
 });
 
-$r->add('user/(.*)/edit', function($id) {
-	echo 'Edit user with id '.$id.'<br/>';
+
+
+$r->add('admin/(.*)/edit', function($id) {
+	require_once 'app/database.php';
+	require_once 'app/auth.php';
+	
+	$db =	new \Database();
+	$auth = new \Auth($db->getConnection());
+		
+	if (!$auth->is_logged()) {
+	    header('HTTP/1.0 403 Forbidden');
+	    echo "Forbidden";
+	    exit();
+	}
 });
 
 $r->add('(.*)/(.*)/(.*)/(.*)', function($var1,$var2,$var3,$var4) {
@@ -46,5 +69,9 @@ $app = new \Slim\App();
 $app->put('/books/{id}', function ($request, $response, $args) {
     // Update book identified by $args['id']
 });
+
+http://requiremind.com/a-most-simple-php-mvc-beginners-tutorial/
+https://www.php-einfach.de/experte/objektorientierte-programmierung-oop/php-design-patterns/model-view-controller-in-php/
+
 
 */

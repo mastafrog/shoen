@@ -1,17 +1,26 @@
 <?php
 
-class Db
+class Database
 {
     private $_connection;
-    private static $_instance; //The single instance
-    private $_host = DB_HOST;
-    private $_username = DB_USER;
-    private $_password = DB_PASSWORD;
-    private $_database = DB_DB;
-    /*
+    private static $_instance;
+    private $_host;
+    private $_username;
+    private $_password = '';
+    private $_database = 'c9';
+    
+    
+    /* Cloud9 specific
+    servername = getenv('IP');
+    $username = getenv('C9_USER');
+    $password = "";
+    $database = "c9";
+    $dbport = 3306;
+    
     Get an instance of the Database
     @return Instance
     */
+    
     public static function getInstance()
     {
         if (!self::$_instance) { // If no instance then make one
@@ -19,9 +28,14 @@ class Db
         }
         return self::$_instance;
     }
+    
+    
     // Constructor
-    private function __construct()
+    /*private*/ function __construct()
     {
+        $this->_host =  getenv('IP');
+        $this->_username = getenv('C9_USER');
+        
         try {
             $this->_connection  = new \PDO("mysql:host=$this->_host;dbname=$this->_database", $this->_username, $this->_password);
             /*** echo a message saying we have connected ***/
@@ -30,10 +44,14 @@ class Db
             echo $e->getMessage();
         }
     }
+    
+    
     // Magic method clone is empty to prevent duplication of connection
     private function __clone()
     {
     }
+    
+    
     // Get mysql pdo connection
     public function getConnection()
     {
