@@ -3,10 +3,24 @@ require_once 'app/database.php';
 
 class Model {
 	
-	static $db;
+	private $db;
 	
 	public function __construct() {
 		self::$db = new Database();
+	}
+	
+	public static function all() {
+		$list = [];
+		$db = self::$db->getConnection();
+		print_r("<br>");
+		echo var_dump($db);
+		$req = $db->query('SELECT * FROM tours');
+		
+		// we create a list of Post objects from the database results
+		foreach($req->fetchAll() as $post) {
+			$list[] = new Post($post['id'], $post['title'], $post['short_desc']);
+		}
+		return $list;
 	}
 }
 
@@ -16,7 +30,6 @@ class Model {
  *  https://github.com/panique/php-login-minimal
  *  
 app.zeplin.io
-mastafrog-zepyxfrog123
 
 
 http://requiremind.com/a-most-simple-php-mvc-beginners-tutorial/
