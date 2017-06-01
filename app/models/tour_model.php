@@ -15,7 +15,7 @@ class Tour_Model extends Model {
     //    return $this->db->getInstance();
 	}
 	
-	function find_all() {
+	function find_all($count, $start) {
 		$list = [];
 		$req = $db->query('SELECT {id} FROM tours');
 		
@@ -24,8 +24,7 @@ class Tour_Model extends Model {
 		}
 		return $list;
 	}
-	
-	
+
 	function find_one($id) {
 		
 	/*	echo "starting findone <br>";
@@ -40,6 +39,24 @@ class Tour_Model extends Model {
 		if (!$row = $query->fetch(\PDO::FETCH_ASSOC)) {
 			return false;
 		}
+		
+		$result = $row;
+		return $result;
+	}
+
+
+	function add_one($id) {
+
+        $query = $this->dbh->prepare("INSERT INTO tours ( title, short ) VALUES (?, ?)");
+        if (!$query->execute(array($data['hash'], $data['expire'], $ip, $data['cookie_crc']))) {
+            return false;
+        }
+        $data['expire'] = strtotime($data['expire']);
+        return $data;
+		
+		
+		
+		
 		
 		$result = $row;
 		return $result;

@@ -1,6 +1,5 @@
 <html>
     <head>
-        
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
@@ -10,8 +9,17 @@
     </head>
 
     <style type="text/css">
+    
+        body {
+          position: relative;
+          margin: 0;
+          padding-bottom: 6rem;
+          min-height: 100%;
+        }
+            
+    
         #main-menu.navbar-default .navbar-brand {
-        color: rgba(255, 255, 255, 1);
+            color: rgba(255, 255, 255, 1);
         }
         #main-menu.navbar-default {
             font-size: 14px;
@@ -49,8 +57,8 @@
         }
     </style>
 <body>
-<!---
-    <div id="main-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+<!-- navbar-fixed-top -->
+    <div id="main-menu" class="navbar navbar-default navbar-top" role="navigation">
         
         <div class="container">
             <div class="navbar-header"><a class="navbar-brand" href="#">Shoen.de</a>
@@ -68,4 +76,4 @@
                 </ul>
             </div>
         </div>
-    </div>-->
+    </div>

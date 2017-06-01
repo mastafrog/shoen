@@ -3,7 +3,7 @@ require_once 'app/router.php';
 //require_once 'app/controller.php';
 
 
-/*https://github.com/liamjack/AuthPortal */
+/* https://github.com/liamjack/AuthPortal */
 /* TODO - Namespaces
 namespace Model; 
 class Welcome extends \Model {
@@ -14,7 +14,7 @@ class Controller_Welcome extends Controller {...
 // $a = new Auth();
 
 $basepath = 'shoen';
-echo "<pre>";
+// echo "<pre>";
 
 /*  Routen  */
 

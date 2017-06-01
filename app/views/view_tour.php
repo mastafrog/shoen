@@ -1,1 +1,1 @@
-<h1><?php echo var_dump($data); ?></h1>
+<h1><?php ?></h1>

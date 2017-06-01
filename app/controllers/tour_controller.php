@@ -19,9 +19,9 @@ class Tour_Controller extends Controller {
 	}
 	
 	function view($id) {
-		$data = $this->m->find_one($id) ;
-		$this->view->title = $data['title'];
-		$this->view->content = $data;
-		$this->view->render('view_tour');
+		$data = $this->m->find_one($id);
+		$data['layout'] = '3-1_layout';
+		
+		$this->view->render('view_tour', $data);
 	}
 }
