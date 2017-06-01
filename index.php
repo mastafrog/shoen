@@ -1,6 +1,6 @@
 <?php
 require_once 'app/router.php';
-require_once 'app/controller.php';
+//require_once 'app/controller.php';
 
 
 /*https://github.com/liamjack/AuthPortal */
@@ -13,26 +13,27 @@ class Controller_Welcome extends Controller {...
 
 // $a = new Auth();
 
-
+$basepath = 'shoen';
 echo "<pre>";
 
 /*  Routen  */
 
 $r = new router();
+$r->set_basepath($GLOBALS["basepath"]);
 
-$r->set_basepath('shoen');
 
 $r->add('', function() {
-	echo 'Welcome :-)';
-	echo '<br>'. phpversion();
-});
-
-$r->add('test', function() {
 	require_once 'app/controllers/tour_controller.php';
 	$c = new Tour_Controller();
 	$c->index();
 });
 
+
+$r->add('tour/(.*)', function($id) {
+	require_once 'app/controllers/tour_controller.php';
+	$c = new Tour_Controller();
+	$c->view($id);
+});
 
 
 $r->add('admin/(.*)/edit', function($id) {
@@ -43,9 +44,8 @@ $r->add('admin/(.*)/edit', function($id) {
 	$auth = new \Auth($db->getConnection());
 		
 	if (!$auth->is_logged()) {
-	    header('HTTP/1.0 403 Forbidden');
-	    echo "Forbidden";
-	    exit();
+		header("Location: ". $_SERVER['HTTP_HOST'] .'/'. $GLOBALS["basepath"]);
+		die();
 	}
 });
 

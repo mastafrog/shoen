@@ -51,10 +51,10 @@ class Database
     {
     }
     
-    
     // Get mysql pdo connection
     public function getConnection()
-    {
+    {   
+        echo "<br>database.php: getting Connection<br>";
         return $this->_connection;
     }
 }

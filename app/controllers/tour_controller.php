@@ -1,44 +1,35 @@
 <?php
-require_once 'app/model.php';
-require_once 'app/database.php';
-
+require_once 'app/controller.php';
+//require_once 'app/models/tour_model.php';
 
 class Tour_Controller extends Controller {
 	
-	private $tours;
-	private $db;
+	public $m;
 	
 	function __construct() {
+		// Davor!
+		parent::load_model('tour_model');
+		// Start
 		parent::__construct();
-		//TODO Implement Model	$this->tours = new Model();
-		$this->db = new Database();
 	}
 	
 	function index() {
 		
 	//	$sth = $this->tours->prepare("SELECT * FROM tours");
 	//	$sth->execute();
-	/* Fetch all of the remaining rows in the result set */
-		
-		echo "<br>";
-		$list = [];
-		$con = $this->db->getConnection();
-		$req = $con->query('SELECT * FROM tours');
-		
-		// we create a list of Post objects from the database results
-		foreach($req->fetchAll() as $post) {
-			$list[] = array($post['id'], $post['title'], $post['short_desc']);
-		}
-		
-		echo var_dump( $list );
-		echo "<br>";
 
+		/* Fetch all of the remaining rows in the result set */
+		$result = $this->bla->all();
+		print_r($result);
+		
 	    echo "<br> tour controller</br>";
 		$this->view->title = 'Welcome :D';
 		$this->view->render('landingpage');
 	}
 	
-	function get_all() {
+	function view($id) {
 		
+	//	$this->m = $this->load_model('tour_model');
+		echo var_dump( $this->m->find_one($id) );
 	}
 }
